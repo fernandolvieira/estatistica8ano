@@ -18,6 +18,13 @@
             darkMode: 'class',
             theme: {
                 extend: {
+                    colors: {
+                        cefs: {
+                            DEFAULT: '#8E2424',
+                            light: '#9E2A2B',
+                            dark: '#6E1B1B',
+                        }
+                    },
                     fontFamily: {
                         sans: ['Inter', 'system-ui', 'sans-serif'],
                         display: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
@@ -41,41 +48,44 @@
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
 
     <!-- Navbar Fixa (Glassmorphism) -->
-    <header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
+    <header class="fixed top-0 inset-x-0 z-50 bg-white/85 dark:bg-slate-950/85 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo / Título -->
-                <a href="#inicio" class="flex items-center gap-2.5 group focus:outline-none">
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-sky-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+            <div class="flex items-center justify-between h-16 sm:h-[72px] gap-3">
+                <!-- Esquerda: Título do Projeto -->
+                <a href="#inicio" class="flex items-center gap-2.5 group focus:outline-none shrink-0">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cefs to-cefs-light flex items-center justify-center text-white shadow-md shadow-cefs/25 group-hover:scale-105 transition-transform">
                         <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
                     </div>
                     <div class="flex flex-col">
                         <span class="font-display font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white leading-tight">
-                            Estatística 8º Ano <span class="text-indigo-600 dark:text-indigo-400">• CEFS</span>
+                            Estatística 8º Ano
                         </span>
-                        <span class="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block leading-tight">
-                            Centro Educacional Frei Seráfico
+                        <span class="text-[11px] font-medium text-cefs dark:text-rose-300 leading-tight">
+                            CEFS · SJDR-MG
                         </span>
                     </div>
                 </a>
 
-                <!-- Links Desktop -->
+                <!-- Centro: Links Desktop -->
                 <nav class="hidden md:flex items-center gap-1">
-                    <a href="#sobre" class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/70 dark:text-slate-300 dark:hover:text-indigo-400 dark:hover:bg-slate-800/70 transition-colors">
-                        Sobre o Projeto
+                    <a href="#inicio" class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-cefs hover:bg-rose-50/70 dark:text-slate-300 dark:hover:text-rose-300 dark:hover:bg-slate-800/70 transition-colors">
+                        Início
                     </a>
-                    <a href="#destaques" class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/70 dark:text-slate-300 dark:hover:text-indigo-400 dark:hover:bg-slate-800/70 transition-colors">
+                    <a href="#sobre" class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-cefs hover:bg-rose-50/70 dark:text-slate-300 dark:hover:text-rose-300 dark:hover:bg-slate-800/70 transition-colors">
+                        Sobre
+                    </a>
+                    <a href="#destaques" class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-cefs hover:bg-rose-50/70 dark:text-slate-300 dark:hover:text-rose-300 dark:hover:bg-slate-800/70 transition-colors">
                         Destaques
                     </a>
-                    <a href="#resultados" class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/70 dark:text-slate-300 dark:hover:text-indigo-400 dark:hover:bg-slate-800/70 transition-colors">
-                        Grupos &amp; Resultados
+                    <a href="#resultados" class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-cefs hover:bg-rose-50/70 dark:text-slate-300 dark:hover:text-rose-300 dark:hover:bg-slate-800/70 transition-colors">
+                        Pesquisas
                     </a>
                 </nav>
 
-                <!-- Ações (Tema + Menu Mobile) -->
-                <div class="flex items-center gap-2">
+                <!-- Direita: Tema + Menu Mobile + Logotipo Institucional no canto superior direito -->
+                <div class="flex items-center gap-2 sm:gap-3 shrink-0">
                     <button id="theme-toggle" type="button" aria-label="Alternar tema claro e escuro"
-                        class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-300 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-300 transition-all focus:outline-none focus:ring-2 focus:ring-cefs">
                         <i id="theme-icon-moon" data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
                         <i id="theme-icon-sun" data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
                     </button>
@@ -84,6 +94,24 @@
                         class="md:hidden p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors">
                         <i data-lucide="menu" class="w-5 h-5"></i>
                     </button>
+
+                    <!-- Divisor sutil em desktop -->
+                    <span aria-hidden="true" class="hidden sm:block h-7 w-px bg-slate-200 dark:bg-slate-800"></span>
+
+                    <!-- Logotipo CEFS (elemento mais à direita) -->
+                    <a href="#inicio" title="Centro Educacional Frei Seráfico"
+                        class="flex items-center justify-center transition-all duration-300 dark:bg-white/95 dark:px-2.5 dark:py-1 dark:rounded-xl dark:shadow-sm">
+                        <img src="logo.png"
+                             alt="Logo Centro Educacional Frei Seráfico"
+                             class="h-10 sm:h-12 w-auto object-contain select-none"
+                             onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden'); document.getElementById('logo-fallback').classList.add('inline-flex');">
+                        <!-- Fallback discreto caso logo.png ainda não esteja no diretório raiz -->
+                        <span id="logo-fallback"
+                              class="hidden items-center gap-1.5 px-3 py-1.5 rounded-full bg-cefs text-white font-display font-bold text-xs tracking-wide border-2 border-white/80 shadow-sm whitespace-nowrap">
+                            <span class="w-5 h-5 rounded-full bg-slate-800 text-white text-[10px] font-extrabold flex items-center justify-center border border-white/70">S</span>
+                            FREI SERÁFICO
+                        </span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -91,54 +119,57 @@
         <!-- Menu Mobile -->
         <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md">
             <div class="px-4 py-3 space-y-1">
-                <a href="#sobre" class="mobile-nav-link block px-4 py-3 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-800">
-                    Sobre o Projeto
+                <a href="#inicio" class="mobile-nav-link block px-4 py-3 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-rose-50 dark:hover:bg-slate-800">
+                    Início
                 </a>
-                <a href="#destaques" class="mobile-nav-link block px-4 py-3 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-800">
+                <a href="#sobre" class="mobile-nav-link block px-4 py-3 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-rose-50 dark:hover:bg-slate-800">
+                    Sobre
+                </a>
+                <a href="#destaques" class="mobile-nav-link block px-4 py-3 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-rose-50 dark:hover:bg-slate-800">
                     Destaques
                 </a>
-                <a href="#resultados" class="mobile-nav-link block px-4 py-3 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-800">
-                    Grupos &amp; Resultados
+                <a href="#resultados" class="mobile-nav-link block px-4 py-3 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-rose-50 dark:hover:bg-slate-800">
+                    Pesquisas
                 </a>
             </div>
         </div>
     </header>
 
     <!-- Conteúdo Principal -->
-    <main id="inicio" class="pt-16">
+    <main id="inicio" class="pt-16 sm:pt-[72px]">
 
         <!-- Hero Section -->
         <section class="relative overflow-hidden py-16 sm:py-24 lg:py-28">
             <!-- Elementos decorativos de fundo -->
             <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
-                <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[48rem] h-[28rem] rounded-full bg-gradient-to-tr from-indigo-500/15 via-sky-400/15 to-emerald-400/15 dark:from-indigo-500/20 dark:via-sky-500/10 dark:to-emerald-500/10 blur-3xl"></div>
+                <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[48rem] h-[28rem] rounded-full bg-gradient-to-tr from-cefs/15 via-indigo-500/12 to-sky-400/15 dark:from-cefs/25 dark:via-indigo-500/15 dark:to-sky-500/10 blur-3xl"></div>
             </div>
 
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <!-- Badge da Escola -->
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/80 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-50 dark:bg-cefs/20 border border-cefs/25 dark:border-rose-400/30 text-cefs dark:text-rose-200 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
                     <i data-lucide="graduation-cap" class="w-4 h-4"></i>
                     <span>Centro Educacional Frei Seráfico • São João del-Rei - MG</span>
                 </div>
 
                 <!-- Título Principal -->
                 <h1 class="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl tracking-tight text-slate-900 dark:text-white max-w-4xl mx-auto leading-[1.12]">
-                    Retrato da Juventude:
-                    <span class="bg-gradient-to-r from-indigo-600 via-sky-500 to-emerald-500 dark:from-indigo-400 dark:via-sky-400 dark:to-emerald-400 bg-clip-text text-transparent">
-                        Pesquisa Estatística do 8º Ano
+                    Trabalho de Estatística —
+                    <span class="bg-gradient-to-r from-cefs via-rose-600 to-indigo-600 dark:from-rose-400 dark:via-indigo-400 dark:to-sky-400 bg-clip-text text-transparent">
+                        8º Ano EFII
                     </span>
                 </h1>
 
                 <!-- Subtítulo -->
                 <p class="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
-                    Uma investigação prática unindo os conceitos de <strong>Matemática</strong> — estatística, frequências e construção de gráficos — aos hábitos, rotinas e desafios reais dos adolescentes do 6º ao 9º ano do Ensino Fundamental II.
+                    <strong>Centro Educacional Frei Seráfico (São João del-Rei - MG)</strong> — Uma investigação prática unindo os conceitos de Matemática (estatística, frequências e construção de gráficos) aos hábitos, rotinas e desafios reais dos adolescentes do 6º ao 9º ano.
                 </p>
 
                 <!-- Botões de Ação -->
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-                    <a href="#resultados" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-indigo-600/25 hover:shadow-indigo-600/40 transition-all">
+                    <a href="#resultados" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-cefs hover:bg-cefs-dark text-white font-semibold text-sm sm:text-base shadow-lg shadow-cefs/25 hover:shadow-cefs/40 transition-all">
                         <i data-lucide="pie-chart" class="w-5 h-5"></i>
-                        Explorar Resultados
+                        Explorar Pesquisas
                     </a>
                     <a href="#sobre" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold text-sm sm:text-base border border-slate-200 dark:border-slate-800 shadow-sm transition-all">
                         <i data-lucide="book-open" class="w-5 h-5"></i>
@@ -149,11 +180,11 @@
                 <!-- 4 Cards de Métricas Gerais (KPIs) -->
                 <div class="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto">
                     <div class="bg-white dark:bg-slate-900/90 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-soft dark:shadow-soft-dark text-left hover:-translate-y-0.5 transition-transform">
-                        <div class="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-rose-100 dark:bg-cefs/25 text-cefs dark:text-rose-300 flex items-center justify-center mb-3">
                             <i data-lucide="users" class="w-5 h-5"></i>
                         </div>
                         <div class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white">91 Alunos</div>
-                        <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">População: 6º ao 9º ano EF</div>
+                        <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">População (6º ao 9º ano)</div>
                     </div>
 
                     <div class="bg-white dark:bg-slate-900/90 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-soft dark:shadow-soft-dark text-left hover:-translate-y-0.5 transition-transform">
@@ -169,7 +200,7 @@
                             <i data-lucide="clipboard-list" class="w-5 h-5"></i>
                         </div>
                         <div class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white">8 Temas</div>
-                        <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Entre 10 propostos</div>
+                        <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Temas pesquisados</div>
                     </div>
 
                     <div class="bg-white dark:bg-slate-900/90 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-soft dark:shadow-soft-dark text-left hover:-translate-y-0.5 transition-transform">
@@ -177,7 +208,7 @@
                             <i data-lucide="clock" class="w-5 h-5"></i>
                         </div>
                         <div class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white">5 Aulas</div>
-                        <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Coleta, cálculos e análise</div>
+                        <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">De desenvolvimento</div>
                     </div>
                 </div>
             </div>
@@ -238,8 +269,8 @@
                         </div>
 
                         <!-- Ficha Técnica -->
-                        <div class="rounded-2xl bg-gradient-to-br from-indigo-600 to-sky-600 p-6 text-white shadow-lg shadow-indigo-600/20">
-                            <div class="text-xs font-bold uppercase tracking-wider text-indigo-100 mb-3 flex items-center gap-2">
+                        <div class="rounded-2xl bg-gradient-to-br from-cefs to-cefs-dark p-6 text-white shadow-lg shadow-cefs/25">
+                            <div class="text-xs font-bold uppercase tracking-wider text-rose-100 mb-3 flex items-center gap-2">
                                 <i data-lucide="award" class="w-4 h-4"></i>
                                 Ficha Técnica
                             </div>
@@ -249,8 +280,8 @@
                                         <i data-lucide="calculator" class="w-5 h-5"></i>
                                     </div>
                                     <div>
-                                        <div class="text-xs text-indigo-100">Orientação e Supervisão</div>
-                                        <div class="font-display font-bold text-sm sm:text-base">Prof. Matheus <span class="font-normal text-indigo-100">(Matemática)</span></div>
+                                        <div class="text-xs text-rose-100">Supervisão e Orientação</div>
+                                        <div class="font-display font-bold text-sm sm:text-base">Prof. Matheus <span class="font-normal text-rose-100">(Matemática)</span></div>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl p-3">
@@ -258,8 +289,8 @@
                                         <i data-lucide="laptop" class="w-5 h-5"></i>
                                     </div>
                                     <div>
-                                        <div class="text-xs text-indigo-100">Desenvolvimento do Site</div>
-                                        <div class="font-display font-bold text-sm sm:text-base">Prof. Fernando <span class="font-normal text-indigo-100">(Informática)</span></div>
+                                        <div class="text-xs text-rose-100">Montagem do Site</div>
+                                        <div class="font-display font-bold text-sm sm:text-base">Prof. Fernando <span class="font-normal text-rose-100">(Informática)</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -345,6 +376,25 @@
 
                     <!-- Destaque 4 -->
                     <div class="group relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-6 shadow-soft dark:shadow-soft-dark hover:-translate-y-1 transition-all">
+                        <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-cefs to-rose-500"></div>
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-lg bg-rose-50 dark:bg-rose-950/70 text-cefs dark:text-rose-300 mb-3">
+                                    Uso de Tela
+                                </span>
+                                <div class="font-display font-extrabold text-4xl text-cefs dark:text-rose-400">21,5%</div>
+                            </div>
+                            <div class="w-11 h-11 rounded-2xl bg-rose-100 dark:bg-rose-950 text-cefs dark:text-rose-400 flex items-center justify-center shrink-0">
+                                <i data-lucide="clock" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            passam <strong>8h ou mais por dia</strong> no celular apenas por lazer.
+                        </p>
+                    </div>
+
+                    <!-- Destaque 5 -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-6 shadow-soft dark:shadow-soft-dark hover:-translate-y-1 transition-all">
                         <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-purple-600 to-fuchsia-500"></div>
                         <div class="flex items-start justify-between gap-4">
                             <div>
@@ -362,7 +412,7 @@
                         </p>
                     </div>
 
-                    <!-- Destaque 5 -->
+                    <!-- Destaque 6 -->
                     <div class="group relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-6 shadow-soft dark:shadow-soft-dark hover:-translate-y-1 transition-all">
                         <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-emerald-600 to-teal-400"></div>
                         <div class="flex items-start justify-between gap-4">
@@ -370,33 +420,14 @@
                                 <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 mb-3">
                                     Atividades Físicas
                                 </span>
-                                <div class="font-display font-extrabold text-4xl text-emerald-600 dark:text-emerald-400">33,3%</div>
+                                <div class="font-display font-extrabold text-4xl text-emerald-600 dark:text-emerald-400">66,66%</div>
                             </div>
                             <div class="w-11 h-11 rounded-2xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                                 <i data-lucide="activity" class="w-5 h-5"></i>
                             </div>
                         </div>
                         <p class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                            praticam atividade física intensa <strong>5 dias por semana</strong> fora da escola.
-                        </p>
-                    </div>
-
-                    <!-- Destaque 6 -->
-                    <div class="group relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-6 shadow-soft dark:shadow-soft-dark hover:-translate-y-1 transition-all">
-                        <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-rose-600 to-red-400"></div>
-                        <div class="flex items-start justify-between gap-4">
-                            <div>
-                                <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-lg bg-rose-50 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 mb-3">
-                                    Qualidade do Sono
-                                </span>
-                                <div class="font-display font-extrabold text-4xl text-rose-600 dark:text-rose-400">46,5%</div>
-                            </div>
-                            <div class="w-11 h-11 rounded-2xl bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0">
-                                <i data-lucide="moon-star" class="w-5 h-5"></i>
-                            </div>
-                        </div>
-                        <p class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                            classificam o sono em dias de aula como <strong>regular, ruim ou péssimo</strong>.
+                            praticam atividade física intensa <strong>4 ou mais dias por semana</strong> fora da escola.
                         </p>
                     </div>
                 </div>
@@ -422,7 +453,7 @@
 
                 <!-- Abas / Filtros de Grupo -->
                 <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12" role="tablist" aria-label="Filtrar resultados por grupo">
-                    <button type="button" data-filter="all" class="filter-tab active px-4 sm:px-5 py-2.5 rounded-2xl text-sm font-semibold transition-all cursor-pointer bg-indigo-600 text-white shadow-md shadow-indigo-600/25">
+                    <button type="button" data-filter="all" class="filter-tab active px-4 sm:px-5 py-2.5 rounded-2xl text-sm font-semibold transition-all cursor-pointer bg-cefs text-white shadow-md shadow-cefs/25">
                         Todos os Grupos
                     </button>
                     <button type="button" data-filter="group-1" class="filter-tab px-4 sm:px-5 py-2.5 rounded-2xl text-sm font-semibold transition-all cursor-pointer bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-indigo-500">
@@ -451,7 +482,7 @@
             <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
                 <div>
                     <div class="flex items-center justify-center md:justify-start gap-2.5 mb-2">
-                        <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-600 to-sky-500 flex items-center justify-center text-white">
+                        <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-cefs to-cefs-light flex items-center justify-center text-white">
                             <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
                         </div>
                         <span class="font-display font-bold text-slate-900 dark:text-white">
@@ -465,9 +496,9 @@
 
                 <div class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <p>
-                        <span class="font-semibold text-slate-800 dark:text-slate-200">Orientação:</span> Prof. Matheus (Matemática)
+                        <span class="font-semibold text-slate-800 dark:text-slate-200">Supervisão e Orientação:</span> Prof. Matheus (Matemática)
                         <span class="mx-2 text-slate-300 dark:text-slate-700">•</span>
-                        <span class="font-semibold text-slate-800 dark:text-slate-200">Desenvolvimento Web:</span> Prof. Fernando (Informática)
+                        <span class="font-semibold text-slate-800 dark:text-slate-200">Montagem do Site:</span> Prof. Fernando (Informática)
                     </p>
                 </div>
             </div>
@@ -476,7 +507,7 @@
 
     <!-- Botão Flutuante Voltar ao Topo -->
     <button id="back-to-top" type="button" aria-label="Voltar ao topo"
-        class="fixed bottom-6 right-6 z-40 p-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-600/30 opacity-0 pointer-events-none translate-y-4 transition-all duration-300">
+        class="fixed bottom-6 right-6 z-40 p-3 rounded-2xl bg-cefs hover:bg-cefs-dark text-white shadow-lg shadow-cefs/30 opacity-0 pointer-events-none translate-y-4 transition-all duration-300">
         <i data-lucide="arrow-up" class="w-5 h-5"></i>
     </button>
 
@@ -1237,7 +1268,7 @@
                     });
 
                     // Define cor da aba ativa conforme o grupo
-                    let activeStyle = 'bg-indigo-600 text-white shadow-md shadow-indigo-600/25';
+                    let activeStyle = 'bg-cefs text-white shadow-md shadow-cefs/25';
                     if (target !== 'all') {
                         const grp = SURVEY_GROUPS.find(g => g.id === target);
                         if (grp) activeStyle = grp.theme.activeTab;
