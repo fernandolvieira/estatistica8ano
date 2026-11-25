@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estatística 8º Ano • Centro Educacional Frei Seráfico</title>
+    <meta name="description" content="Resultados do Trabalho de Estatística realizado pela turma do 8º ano do Ensino Fundamental II do Centro Educacional Frei Seráfico (São João del-Rei - MG).">
+
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 24px -4px rgba(15, 23, 42, 0.06), 0 2px 8px -2px rgba(15, 23, 42, 0.04)',
+                        'soft-dark': '0 4px 24px -4px rgba(0, 0, 0, 0.35), 0 2px 8px -2px rgba(0, 0, 0, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Chart.js & DataLabels Plugin via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
+
+    <!-- Navbar Fixa (Glassmorphism) -->
+    <header class="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo / Título -->
+                <a href="#inicio" class="flex items-center gap-2.5 group focus:outline-none">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-sky-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+                        <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-display font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white leading-tight">
+                            Estatística 8º Ano <span class="text-indigo-600 dark:text-indigo-400">• CEFS</span>
+                        </span>
+                        <span class="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block leading-tight">
+                            Centro Educacional Frei Seráfico
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Links Desktop -->
+                <nav class="hidden md:flex items-center gap-1">
+                    <a href="#sobre" class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/70 dark:text-slate-300 dark:hover:text-indigo-400 dark:hover:bg-slate-800/70 transition-colors">
+                        Sobre o Projeto
+                    </a>
+                    <a href="#destaques" class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/70 dark:text-slate-300 dark:hover:text-indigo-400 dark:hover:bg-slate-800/70 transition-colors">
+                        Destaques
+                    </a>
+                    <a href="#resultados" class="px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/70 dark:text-slate-300 dark:hover:text-indigo-400 dark:hover:bg-slate-800/70 transition-colors">
+                        Grupos &amp; Resultados
+                    </a>
+                </nav>
+
+                <!-- Ações (Tema + Menu Mobile) -->
+                <div class="flex items-center gap-2">
+                    <button id="theme-toggle" type="button" aria-label="Alternar tema claro e escuro"
+                        class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-300 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <i id="theme-icon-moon" data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                        <i id="theme-icon-sun" data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                    </button>
+
+                    <button id="mobile-menu-btn" type="button" aria-label="Abrir menu de navegação"
+                        class="md:hidden p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors">
+                        <i data-lucide="menu" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md">
+            <div class="px-4 py-3 space-y-1">
+                <a href="#sobre" class="mobile-nav-link block px-4 py-3 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-800">
+                    Sobre o Projeto
+                </a>
+                <a href="#destaques" class="mobile-nav-link block px-4 py-3 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-800">
+                    Destaques
+                </a>
+                <a href="#resultados" class="mobile-nav-link block px-4 py-3 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-slate-800">
+                    Grupos &amp; Resultados
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main id="inicio" class="pt-16">
+
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden py-16 sm:py-24 lg:py-28">
+            <!-- Elementos decorativos de fundo -->
+            <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
+                <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[48rem] h-[28rem] rounded-full bg-gradient-to-tr from-indigo-500/15 via-sky-400/15 to-emerald-400/15 dark:from-indigo-500/20 dark:via-sky-500/10 dark:to-emerald-500/10 blur-3xl"></div>
+            </div>
+
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <!-- Badge da Escola -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/80 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
+                    <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+                    <span>Centro Educacional Frei Seráfico • São João del-Rei - MG</span>
+                </div>
+
+                <!-- Título Principal -->
+                <h1 class="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl tracking-tight text-slate-900 dark:text-white max-w-4xl mx-auto leading-[1.12]">
+                    Retrato da Juventude:
+                    <span class="bg-gradient-to-r from-indigo-600 via-sky-500 to-emerald-500 dark:from-indigo-400 dark:via-sky-400 dark:to-emerald-400 bg-clip-text text-transparent">
+                        Pesquisa Estatística do 8º Ano
+                    </span>
+                </h1>
+
+                <!-- Subtítulo -->
+                <p class="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
+                    Uma investigação prática unindo os conceitos de <strong>Matemática</strong> — estatística, frequências e construção de gráficos — aos hábitos, rotinas e desafios reais dos adolescentes do 6º ao 9º ano do Ensino Fundamental II.
+                </p>
+
+                <!-- Botões de Ação -->
+                <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+                    <a href="#resultados" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-indigo-600/25 hover:shadow-indigo-600/40 transition-all">
+                        <i data-lucide="pie-chart" class="w-5 h-5"></i>
+                        Explorar Resultados
+                    </a>
+                    <a href="#sobre" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold text-sm sm:text-base border border-slate-200 dark:border-slate-800 shadow-sm transition-all">
+                        <i data-lucide="book-open" class="w-5 h-5"></i>
+                        Conhecer o Projeto
+                    </a>
+                </div>
+
+                <!-- 4 Cards de Métricas Gerais (KPIs) -->
+                <div class="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto">
+                    <div class="bg-white dark:bg-slate-900/90 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-soft dark:shadow-soft-dark text-left hover:-translate-y-0.5 transition-transform">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3">
+                            <i data-lucide="users" class="w-5 h-5"></i>
+                        </div>
+                        <div class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white">91 Alunos</div>
+                        <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">População: 6º ao 9º ano EF</div>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-900/90 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-soft dark:shadow-soft-dark text-left hover:-translate-y-0.5 transition-transform">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3">
+                            <i data-lucide="layers" class="w-5 h-5"></i>
+                        </div>
+                        <div class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white">4 Grupos</div>
+                        <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Pesquisadores do 8º ano</div>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-900/90 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-soft dark:shadow-soft-dark text-left hover:-translate-y-0.5 transition-transform">
+                        <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-3">
+                            <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+                        </div>
+                        <div class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white">8 Temas</div>
+                        <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Entre 10 propostos</div>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-900/90 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-soft dark:shadow-soft-dark text-left hover:-translate-y-0.5 transition-transform">
+                        <div class="w-10 h-10 rounded-xl bg-sky-100 dark:bg-sky-950 text-sky-600 dark:text-sky-400 flex items-center justify-center mb-3">
+                            <i data-lucide="clock" class="w-5 h-5"></i>
+                        </div>
+                        <div class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white">5 Aulas</div>
+                        <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Coleta, cálculos e análise</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Sobre o Trabalho -->
+        <section id="sobre" class="py-16 sm:py-20 bg-white dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800/80 scroll-mt-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                    <!-- Texto de Introdução -->
+                    <div class="lg:col-span-7 space-y-5">
+                        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+                            <i data-lucide="info" class="w-4 h-4"></i>
+                            Sobre o Trabalho
+                        </div>
+                        <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white">
+                            Da sala de aula para o cotidiano da escola
+                        </h2>
+                        <div class="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
+                            <p>
+                                Neste trabalho, realizado pelo <strong>8º ano do Centro Educacional Frei Seráfico (SJDR - MG)</strong>, foram feitas pesquisas com os colegas de todo o Ensino Fundamental II (6º ao 9º ano). O objetivo foi relacionar o conteúdo estudado na disciplina de Matemática — <em>estatística, frequências e construção de gráficos</em> — com temas relevantes na vida dos adolescentes atualmente.
+                            </p>
+                            <p>
+                                Ao todo, <strong>10 temas</strong> foram propostos pelo professor e cada grupo escolheu <strong>2 temas</strong> de seu interesse para trabalhar, totalizando <strong>8 temas escolhidos</strong>. As pesquisas foram realizadas pelos integrantes de cada grupo em breves momentos nas outras turmas, combinados com antecedência com os demais professores.
+                            </p>
+                            <p>
+                                Os alunos tiveram <strong>5 aulas</strong> para realizar a coleta de dados, organizar as informações em tabelas, fazer os cálculos de frequência, escrever um relatório para o professor e confeccionar cartazes com os gráficos, que foram expostos em um mural da própria escola. Ao final, cada equipe interpretou os resultados obtidos para propor uma reflexão e sugerir mudanças de hábitos ou comportamentos.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card Ficha Técnica e Etapas -->
+                    <div class="lg:col-span-5 space-y-5">
+                        <!-- Etapas do Processo -->
+                        <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-6 shadow-soft dark:shadow-soft-dark">
+                            <h3 class="font-display font-bold text-base text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                                <i data-lucide="compass" class="w-5 h-5 text-indigo-600 dark:text-indigo-400"></i>
+                                Metodologia Aplicada
+                            </h3>
+                            <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                                <li class="flex items-start gap-3">
+                                    <span class="w-6 h-6 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+                                    <span>Escolha de 2 temas relevantes por grupo dentre 10 opções propostas.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="w-6 h-6 rounded-lg bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+                                    <span>Coleta amostral agendada junto às turmas do 6º ao 9º ano (população de 91 estudantes).</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="w-6 h-6 rounded-lg bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">3</span>
+                                    <span>Tabulação, cálculo de frequências relativas, construção de gráficos e cartazes no mural.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="w-6 h-6 rounded-lg bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">4</span>
+                                    <span>Análise crítica e propostas de conscientização para a comunidade escolar.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Ficha Técnica -->
+                        <div class="rounded-2xl bg-gradient-to-br from-indigo-600 to-sky-600 p-6 text-white shadow-lg shadow-indigo-600/20">
+                            <div class="text-xs font-bold uppercase tracking-wider text-indigo-100 mb-3 flex items-center gap-2">
+                                <i data-lucide="award" class="w-4 h-4"></i>
+                                Ficha Técnica
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl p-3">
+                                    <div class="w-9 h-9 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+                                        <i data-lucide="calculator" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-indigo-100">Orientação e Supervisão</div>
+                                        <div class="font-display font-bold text-sm sm:text-base">Prof. Matheus <span class="font-normal text-indigo-100">(Matemática)</span></div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl p-3">
+                                    <div class="w-9 h-9 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+                                        <i data-lucide="laptop" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-indigo-100">Desenvolvimento do Site</div>
+                                        <div class="font-display font-bold text-sm sm:text-base">Prof. Fernando <span class="font-normal text-indigo-100">(Informática)</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Destaques da Pesquisa (KPIs Visuais) -->
+        <section id="destaques" class="py-16 sm:py-20 scroll-mt-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        Principais Achados
+                    </div>
+                    <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-slate-900 dark:text-white">
+                        Destaques da Pesquisa
+                    </h2>
+                    <p class="mt-3 text-slate-600 dark:text-slate-400 text-sm sm:text-base">
+                        Um resumo visual dos números que mais chamaram a atenção dos estudantes durante a análise dos dados.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                    <!-- Destaque 1 -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-6 shadow-soft dark:shadow-soft-dark hover:-translate-y-1 transition-all">
+                        <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-blue-500 to-sky-400"></div>
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-lg bg-sky-50 dark:bg-sky-950/70 text-sky-700 dark:text-sky-300 mb-3">
+                                    Sono &amp; Tecnologia
+                                </span>
+                                <div class="font-display font-extrabold text-4xl text-sky-600 dark:text-sky-400">76%</div>
+                            </div>
+                            <div class="w-11 h-11 rounded-2xl bg-sky-100 dark:bg-sky-950 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0">
+                                <i data-lucide="smartphone" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            usam telas na cama <strong>sempre ou quase sempre</strong> até o momento exato de dormir.
+                        </p>
+                    </div>
+
+                    <!-- Destaque 2 -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-6 shadow-soft dark:shadow-soft-dark hover:-translate-y-1 transition-all">
+                        <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-orange-500 to-amber-400"></div>
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-lg bg-orange-50 dark:bg-orange-950/70 text-orange-700 dark:text-orange-300 mb-3">
+                                    Lanche no Recreio
+                                </span>
+                                <div class="font-display font-extrabold text-4xl text-orange-600 dark:text-orange-400">51,1%</div>
+                            </div>
+                            <div class="w-11 h-11 rounded-2xl bg-orange-100 dark:bg-orange-950 text-orange-600 dark:text-orange-400 flex items-center justify-center shrink-0">
+                                <i data-lucide="utensils" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            escolhem <strong>salgado frito da cantina</strong> como lanche principal durante o intervalo.
+                        </p>
+                    </div>
+
+                    <!-- Destaque 3 -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-6 shadow-soft dark:shadow-soft-dark hover:-translate-y-1 transition-all">
+                        <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-indigo-600 to-violet-500"></div>
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 mb-3">
+                                    Ladrão do Tempo
+                                </span>
+                                <div class="font-display font-extrabold text-4xl text-indigo-600 dark:text-indigo-400">42,0%</div>
+                            </div>
+                            <div class="w-11 h-11 rounded-2xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
+                                <i data-lucide="play-circle" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            apontam o <strong>TikTok</strong> como o aplicativo ou rede social que mais consome seu tempo.
+                        </p>
+                    </div>
+
+                    <!-- Destaque 4 -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-6 shadow-soft dark:shadow-soft-dark hover:-translate-y-1 transition-all">
+                        <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-purple-600 to-fuchsia-500"></div>
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-lg bg-purple-50 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 mb-3">
+                                    Hábito de Leitura
+                                </span>
+                                <div class="font-display font-extrabold text-4xl text-purple-600 dark:text-purple-400">26,3%</div>
+                            </div>
+                            <div class="w-11 h-11 rounded-2xl bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
+                                <i data-lucide="book-x" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            não leram <strong>nenhum livro inteiro</strong> por prazer nos últimos 6 meses.
+                        </p>
+                    </div>
+
+                    <!-- Destaque 5 -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-6 shadow-soft dark:shadow-soft-dark hover:-translate-y-1 transition-all">
+                        <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-emerald-600 to-teal-400"></div>
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 mb-3">
+                                    Atividades Físicas
+                                </span>
+                                <div class="font-display font-extrabold text-4xl text-emerald-600 dark:text-emerald-400">33,3%</div>
+                            </div>
+                            <div class="w-11 h-11 rounded-2xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                                <i data-lucide="activity" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            praticam atividade física intensa <strong>5 dias por semana</strong> fora da escola.
+                        </p>
+                    </div>
+
+                    <!-- Destaque 6 -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-6 shadow-soft dark:shadow-soft-dark hover:-translate-y-1 transition-all">
+                        <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-rose-600 to-red-400"></div>
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-lg bg-rose-50 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 mb-3">
+                                    Qualidade do Sono
+                                </span>
+                                <div class="font-display font-extrabold text-4xl text-rose-600 dark:text-rose-400">46,5%</div>
+                            </div>
+                            <div class="w-11 h-11 rounded-2xl bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0">
+                                <i data-lucide="moon-star" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            classificam o sono em dias de aula como <strong>regular, ruim ou péssimo</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Principal: Resultados por Grupo -->
+        <section id="resultados" class="py-16 sm:py-20 bg-slate-100/70 dark:bg-slate-900/30 border-t border-slate-200/80 dark:border-slate-800/80 scroll-mt-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Cabeçalho da Seção -->
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">
+                        <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
+                        Tabelas, Gráficos e Conclusões
+                    </div>
+                    <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-slate-900 dark:text-white">
+                        Resultados por Grupo
+                    </h2>
+                    <p class="mt-3 text-slate-600 dark:text-slate-400 text-sm sm:text-base">
+                        Filtre por grupo ou explore todas as pesquisas. Você também pode alternar o estilo de visualização em cada gráfico para comparar os dados.
+                    </p>
+                </div>
+
+                <!-- Abas / Filtros de Grupo -->
+                <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12" role="tablist" aria-label="Filtrar resultados por grupo">
+                    <button type="button" data-filter="all" class="filter-tab active px-4 sm:px-5 py-2.5 rounded-2xl text-sm font-semibold transition-all cursor-pointer bg-indigo-600 text-white shadow-md shadow-indigo-600/25">
+                        Todos os Grupos
+                    </button>
+                    <button type="button" data-filter="group-1" class="filter-tab px-4 sm:px-5 py-2.5 rounded-2xl text-sm font-semibold transition-all cursor-pointer bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-indigo-500">
+                        Grupo 1
+                    </button>
+                    <button type="button" data-filter="group-2" class="filter-tab px-4 sm:px-5 py-2.5 rounded-2xl text-sm font-semibold transition-all cursor-pointer bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-emerald-400 dark:hover:border-emerald-500">
+                        Grupo 2
+                    </button>
+                    <button type="button" data-filter="group-3" class="filter-tab px-4 sm:px-5 py-2.5 rounded-2xl text-sm font-semibold transition-all cursor-pointer bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-rose-400 dark:hover:border-rose-500">
+                        Grupo 3
+                    </button>
+                    <button type="button" data-filter="group-4" class="filter-tab px-4 sm:px-5 py-2.5 rounded-2xl text-sm font-semibold transition-all cursor-pointer bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-sky-400 dark:hover:border-sky-500">
+                        Grupo 4
+                    </button>
+                </div>
+
+                <!-- Container Dinâmico dos Grupos -->
+                <div id="groups-container" class="space-y-14"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-12 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+                <div>
+                    <div class="flex items-center justify-center md:justify-start gap-2.5 mb-2">
+                        <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-600 to-sky-500 flex items-center justify-center text-white">
+                            <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                        </div>
+                        <span class="font-display font-bold text-slate-900 dark:text-white">
+                            Centro Educacional Frei Seráfico
+                        </span>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">
+                        São João del-Rei, MG • Trabalho de Estatística — 8º Ano EFII
+                    </p>
+                </div>
+
+                <div class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                    <p>
+                        <span class="font-semibold text-slate-800 dark:text-slate-200">Orientação:</span> Prof. Matheus (Matemática)
+                        <span class="mx-2 text-slate-300 dark:text-slate-700">•</span>
+                        <span class="font-semibold text-slate-800 dark:text-slate-200">Desenvolvimento Web:</span> Prof. Fernando (Informática)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão Flutuante Voltar ao Topo -->
+    <button id="back-to-top" type="button" aria-label="Voltar ao topo"
+        class="fixed bottom-6 right-6 z-40 p-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-600/30 opacity-0 pointer-events-none translate-y-4 transition-all duration-300">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- Script Principal: Dados, Renderização, Gráficos Chart.js e Interatividade -->
+    <script>
+        // Registra o plugin DataLabels do Chart.js globalmente
+        Chart.register(ChartDataLabels);
+
+        // =========================================================================
+        // 1. BASE DE DADOS EXATA DAS PESQUISAS (SEM ALTERAÇÃO DE VALORES)
+        // =========================================================================
+        const SURVEY_GROUPS = [
+            {
+                id: 'group-1',
+                name: 'Grupo 1',
+                subtitle: 'Uso de Telas e Hábito de Leitura',
+                members: ['Beatriz', 'Ana Beatriz', 'Maria Alice', 'Maria Fernanda', 'Raissa', 'Lorenna'],
+                theme: {
+                    headerBg: 'from-indigo-600 via-indigo-600 to-purple-600',
+                    badgeBg: 'bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 border-indigo-200/80 dark:border-indigo-800/60',
+                    barColor: 'bg-indigo-500',
+                    conclusionBg: 'bg-indigo-50/80 dark:bg-indigo-950/40 border-indigo-200/80 dark:border-indigo-800/60',
+                    conclusionIcon: 'text-indigo-600 dark:text-indigo-400',
+                    activeTab: 'bg-indigo-600 text-white shadow-md shadow-indigo-600/25'
+                },
+                // Conclusão unificada para os dois temas do Grupo 1
+                groupConclusion: 'As pesquisas permitem concluir que muitas pessoas passam mais tempo em telas do que lendo. Como forma de conscientização, o grupo propõe que a escola organize palestras e ações sobre o uso consciente do celular e o incentivo da leitura.',
+                topics: [
+                    {
+                        id: 'g1-t1',
+                        title: 'Tema 1: Tempo médio de uso de tela',
+                        population: '91 alunos',
+                        sample: '42 alunos',
+                        question: 'Quantas horas por dia, em média, você passa usando o celular apenas para lazer?',
+                        categoryHeader: 'Tempo/h',
+                        defaultChartType: 'doughnut',
+                        altChartType: 'bar',
+                        decimals: 1,
+                        palette: [
+                            '#0ea5e9', '#f97316', '#16a34a', '#06b6d4',
+                            '#a855f7', '#65a30d', '#1e3a5f', '#b45309', '#14532d'
+                        ],
+                        data: [
+                            { label: '0 h', value: 2.2 },
+                            { label: '1 h', value: 21.5 },
+                            { label: '2 h', value: 24.0 },
+                            { label: '3 h', value: 4.7 },
+                            { label: '4 h', value: 11.9 },
+                            { label: '5 h', value: 7.2 },
+                            { label: '6 h', value: 2.3 },
+                            { label: '7 h', value: 4.7 },
+                            { label: '8 h ou mais', value: 21.5 }
+                        ]
+                    },
+                    {
+                        id: 'g1-t2',
+                        title: 'Tema 2: Hábito de Leitura por Prazer',
+                        population: '91 alunos',
+                        sample: '46 alunos',
+                        question: 'Quantos livros inteiros você leu, nos últimos 6 meses, apenas por diversão?',
+                        categoryHeader: 'Quantidade de livros',
+                        defaultChartType: 'bar',
+                        altChartType: 'doughnut',
+                        decimals: 1,
+                        singleColor: '#9333ea',
+                        palette: [
+                            '#9333ea', '#a855f7', '#7e22ce', '#c084fc',
+                            '#6366f1', '#ec4899', '#8b5cf6', '#d946ef', '#4f46e5'
+                        ],
+                        data: [
+                            { label: 'Nenhum livro', value: 26.3 },
+                            { label: '1 livro', value: 15.2 },
+                            { label: '2 livros', value: 15.2 },
+                            { label: '3 livros', value: 13.0 },
+                            { label: '5 livros', value: 4.3 },
+                            { label: '6 livros', value: 10.9 },
+                            { label: '9 livros', value: 4.3 },
+                            { label: '12 livros', value: 6.5 },
+                            { label: '15 livros', value: 4.3 }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'group-2',
+                name: 'Grupo 2',
+                subtitle: 'Atividades Físicas e Alimentação Natural',
+                members: ['Bruno', 'Davi Viegas', 'Homero', 'Guilherme', 'Luiza Antunes', 'Lucas'],
+                theme: {
+                    headerBg: 'from-emerald-600 via-emerald-600 to-teal-600',
+                    badgeBg: 'bg-emerald-50 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 border-emerald-200/80 dark:border-emerald-800/60',
+                    barColor: 'bg-emerald-500',
+                    conclusionBg: 'bg-emerald-50/80 dark:bg-emerald-950/40 border-emerald-200/80 dark:border-emerald-800/60',
+                    conclusionIcon: 'text-emerald-600 dark:text-emerald-400',
+                    activeTab: 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25'
+                },
+                topics: [
+                    {
+                        id: 'g2-t1',
+                        title: 'Tema 1: Prática de Atividades Físicas',
+                        population: '91 alunos',
+                        sample: '39 alunos',
+                        question: 'Quantos dias por semana você pratica pelo menos 40 minutos de alguma atividade física intensa (fora as aulas de Educação Física da escola)?',
+                        categoryHeader: 'Número de dias',
+                        defaultChartType: 'line',
+                        altChartType: 'bar',
+                        decimals: 2,
+                        lineColor: '#10b981',
+                        lineFill: 'rgba(16, 185, 129, 0.16)',
+                        singleColor: '#10b981',
+                        palette: [
+                            '#10b981', '#059669', '#14b8a6', '#0d9488',
+                            '#34d399', '#047857', '#2dd4bf', '#0f766e'
+                        ],
+                        data: [
+                            { label: 'Nenhum dia', value: 5.13 },
+                            { label: '1 dia', value: 2.56 },
+                            { label: '2 dias', value: 15.38 },
+                            { label: '3 dias', value: 10.26 },
+                            { label: '4 dias', value: 20.51 },
+                            { label: '5 dias', value: 33.33 },
+                            { label: '6 dias', value: 7.69 },
+                            { label: '7 dias', value: 5.13 }
+                        ],
+                        conclusion: 'A maioria dos alunos pratica atividades físicas durante a semana, portanto, a escola poderia incentivar mais ainda esse hábito com mais jogos e atividades esportivas, ajudando todos a manter uma vida mais saudável.'
+                    },
+                    {
+                        id: 'g2-t2',
+                        title: 'Tema 2: Consumo de Alimentos Naturais',
+                        population: '91 alunos',
+                        sample: '42 alunos',
+                        question: 'Quantas porções de frutas você consome por dia, em média?',
+                        categoryHeader: 'Quantidade de porções de frutas',
+                        defaultChartType: 'pie',
+                        altChartType: 'bar',
+                        decimals: 2,
+                        palette: [
+                            '#0f766e', '#f97316', '#16a34a', '#0ea5e9', '#a855f7', '#65a30d'
+                        ],
+                        data: [
+                            { label: 'Nenhuma porção', value: 4.76 },
+                            { label: '1 porção', value: 23.81 },
+                            { label: '2 porções', value: 26.19 },
+                            { label: '3 porções', value: 19.05 },
+                            { label: '4 porções', value: 14.29 },
+                            { label: '5 porções', value: 11.90 }
+                        ],
+                        conclusion: 'Pelos resultados percebemos que a maioria dos alunos come uma ou duas porções de frutas por dia. Por isso, a escola poderia incentivar os alunos a comerem mais frutas, através de palestras mostrando a importância de uma alimentação saudável.'
+                    }
+                ]
+            },
+            {
+                id: 'group-3',
+                name: 'Grupo 3',
+                subtitle: 'Lanche Escolar e Qualidade do Sono',
+                members: ['Luiz Otavio', 'Davi Lucas', 'Eduardo', 'Rafael Gomes', 'Rafael Gaio', 'Bernardo'],
+                theme: {
+                    headerBg: 'from-rose-600 via-rose-500 to-orange-500',
+                    badgeBg: 'bg-rose-50 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 border-rose-200/80 dark:border-rose-800/60',
+                    barColor: 'bg-rose-500',
+                    conclusionBg: 'bg-rose-50/80 dark:bg-rose-950/40 border-rose-200/80 dark:border-rose-800/60',
+                    conclusionIcon: 'text-rose-600 dark:text-rose-400',
+                    activeTab: 'bg-rose-600 text-white shadow-md shadow-rose-600/25'
+                },
+                topics: [
+                    {
+                        id: 'g3-t1',
+                        title: 'Tema 1: Escolha de Lanche no Recreio',
+                        population: '91 alunos',
+                        sample: '43 alunos',
+                        question: 'Qual é a sua escolha mais frequente de lanche durante o intervalo da escola?',
+                        categoryHeader: 'Escolha de lanche mais frequente',
+                        defaultChartType: 'pie',
+                        altChartType: 'bar',
+                        decimals: 1,
+                        palette: [
+                            '#0f4c75', '#f97316', '#16a34a', '#0ea5e9', '#a855f7', '#65a30d'
+                        ],
+                        data: [
+                            { label: 'Salgado frito da cantina', value: 51.1 },
+                            { label: 'Salgado de casa', value: 2.3 },
+                            { label: 'Fruta', value: 4.7 },
+                            { label: 'Salgadinho', value: 14.0 },
+                            { label: 'Pão ou Sanduíche de casa', value: 11.6 },
+                            { label: 'Não lancha', value: 16.3 }
+                        ],
+                        conclusion: 'Os resultados mostram que mais da metade dos alunos (51,1%) opta por salgados fritos da cantina no intervalo, enquanto apenas 4,7% escolhem frutas e 16,3% não lancham. Como forma de melhorar a alimentação no ambiente escolar, o grupo sugere que a escola promova ações de incentivo a lanches mais saudáveis e converse com a cantina para ampliar a oferta de opções assadas ou naturais.'
+                    },
+                    {
+                        id: 'g3-t2',
+                        title: 'Tema 2: Qualidade do Sono',
+                        population: '91 alunos',
+                        sample: '43 alunos',
+                        question: 'Como você classifica a qualidade do seu sono nos dias em que tem aula?',
+                        categoryHeader: 'Classificação do sono',
+                        defaultChartType: 'line',
+                        altChartType: 'bar',
+                        decimals: 1,
+                        lineColor: '#f43f5e',
+                        lineFill: 'rgba(244, 63, 94, 0.16)',
+                        singleColor: '#f43f5e',
+                        palette: ['#10b981', '#0ea5e9', '#f59e0b', '#f97316', '#e11d48'],
+                        data: [
+                            { label: 'Excelente', value: 27.9 },
+                            { label: 'Bom', value: 25.6 },
+                            { label: 'Regular', value: 32.6 },
+                            { label: 'Ruim', value: 2.3 },
+                            { label: 'Péssimo', value: 11.6 }
+                        ],
+                        conclusion: 'Embora pouco mais da metade dos estudantes (53,5%) avalie seu sono como bom ou excelente, uma parcela expressiva (46,5%) o classifica como regular, ruim ou péssimo em dias de aula. Diante disso, o grupo propõe que a escola realize campanhas de conscientização e palestras sobre higiene do sono, ajudando os alunos a descansarem melhor e a terem mais disposição para os estudos.'
+                    }
+                ]
+            },
+            {
+                id: 'group-4',
+                name: 'Grupo 4',
+                subtitle: 'Redes Sociais e Tecnologia na Hora de Dormir',
+                members: ['Gabrielle', 'Marina', 'Maria Luiza', 'Luiza Baena', 'Marllon', 'Andres'],
+                theme: {
+                    headerBg: 'from-sky-600 via-blue-600 to-indigo-600',
+                    badgeBg: 'bg-sky-50 dark:bg-sky-950/70 text-sky-700 dark:text-sky-300 border-sky-200/80 dark:border-sky-800/60',
+                    barColor: 'bg-sky-500',
+                    conclusionBg: 'bg-sky-50/80 dark:bg-sky-950/40 border-sky-200/80 dark:border-sky-800/60',
+                    conclusionIcon: 'text-sky-600 dark:text-sky-400',
+                    activeTab: 'bg-sky-600 text-white shadow-md shadow-sky-600/25'
+                },
+                topics: [
+                    {
+                        id: 'g4-t1',
+                        title: 'Tema 1: O ladrão do tempo',
+                        population: '91 alunos',
+                        sample: '39 pessoas',
+                        question: 'Qual aplicativo ou rede social consome a maior parte do seu tempo atualmente?',
+                        categoryHeader: 'Aplicativo',
+                        defaultChartType: 'doughnut',
+                        altChartType: 'bar',
+                        decimals: 1,
+                        palette: [
+                            '#0f4c75', '#f97316', '#dc2626', '#0ea5e9', '#22c55e', '#eab308'
+                        ],
+                        data: [
+                            { label: 'TikTok', value: 42.0 },
+                            { label: 'Instagram', value: 26.0 },
+                            { label: 'YouTube', value: 5.0 },
+                            { label: 'Jogos', value: 7.0 },
+                            { label: 'WhatsApp', value: 15.0 },
+                            { label: 'Snapchat', value: 5.0 }
+                        ],
+                        conclusion: 'É possível concluir que o uso do TikTok é predominante.'
+                    },
+                    {
+                        id: 'g4-t2',
+                        title: 'Tema 2: Hábitos de Sono e Tecnologia',
+                        population: '91 alunos',
+                        sample: '42 pessoas',
+                        question: 'Você tem o costume de usar telas (celular, tablet, TV) deitado na cama até o momento exato de dormir?',
+                        categoryHeader: 'Uso de telas antes de dormir',
+                        defaultChartType: 'bar',
+                        altChartType: 'doughnut',
+                        decimals: 0,
+                        singleColor: '#0284c7',
+                        palette: ['#0284c7', '#38bdf8', '#f59e0b', '#10b981'],
+                        data: [
+                            { label: 'Sempre', value: 43 },
+                            { label: 'Quase sempre', value: 33 },
+                            { label: 'Raramente', value: 14 },
+                            { label: 'Nunca', value: 10 }
+                        ],
+                        conclusion: 'A maioria dos alunos do Ensino Fundamental conta com uma rotina de sono baseada em telas antes de dormir, o que pode deixar a rotina de sono ruim.'
+                    }
+                ]
+            }
+        ];
+
+        // Armazena instâncias ativas dos gráficos e tipo atual selecionado por tema
+        const chartInstances = {};
+        const activeChartTypes = {};
+
+        // =========================================================================
+        // 2. FUNÇÕES AUXILIARES DE FORMATAÇÃO E TEMA
+        // =========================================================================
+        function formatPercent(value, decimals = 1) {
+            return value.toFixed(decimals).replace('.', ',') + '%';
+        }
+
+        function isDarkMode() {
+            return document.documentElement.classList.contains('dark');
+        }
+
+        function getChartTypeLabel(type) {
+            const labels = {
+                doughnut: 'Rosca',
+                pie: 'Pizza',
+                bar: 'Barras',
+                line: 'Linha'
+            };
+            return labels[type] || type;
+        }
+
+        // =========================================================================
+        // 3. RENDERIZAÇÃO DOS CARDS DE GRUPOS E TEMAS NO DOM
+        // =========================================================================
+        function renderGroupsHTML() {
+            const container = document.getElementById('groups-container');
+            container.innerHTML = '';
+
+            SURVEY_GROUPS.forEach((group) => {
+                const groupSection = document.createElement('article');
+                groupSection.id = group.id;
+                groupSection.className = 'group-section space-y-6 transition-all duration-300';
+                groupSection.dataset.groupId = group.id;
+
+                // Badges dos integrantes
+                const membersHTML = group.members.map(member => `
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-sm text-white text-xs sm:text-sm font-medium border border-white/20">
+                        <i data-lucide="user" class="w-3.5 h-3.5 opacity-80"></i>
+                        ${member}
+                    </span>
+                `).join('');
+
+                // Cabeçalho do Grupo
+                const headerHTML = `
+                    <div class="rounded-3xl bg-gradient-to-r ${group.theme.headerBg} p-6 sm:p-8 text-white shadow-lg">
+                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                            <div>
+                                <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white/80 mb-1">
+                                    <i data-lucide="users" class="w-4 h-4"></i>
+                                    Pesquisa 8º Ano EFII
+                                </div>
+                                <h3 class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight">
+                                    ${group.name} <span class="font-semibold text-white/85 text-lg sm:text-xl block sm:inline sm:ml-2">— ${group.subtitle}</span>
+                                </h3>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                ${membersHTML}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Cards de cada Tema do Grupo
+                const topicsHTML = group.topics.map((topic) => {
+                    activeChartTypes[topic.id] = topic.defaultChartType;
+
+                    // Valor máximo para escalar visualmente as barras da tabela com equilíbrio
+                    const maxVal = Math.max(...topic.data.map(d => d.value));
+
+                    const rowsHTML = topic.data.map((row, idx) => {
+                        const formattedVal = formatPercent(row.value, topic.decimals);
+                        const barWidth = Math.max((row.value / Math.max(maxVal, 1)) * 100, 4);
+                        const dotColor = topic.palette ? topic.palette[idx % topic.palette.length] : (topic.singleColor || '#6366f1');
+
+                        return `
+                            <tr class="border-b border-slate-100 dark:border-slate-800/80 last:border-0 hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                                <td class="py-3 pr-3 text-sm font-medium text-slate-700 dark:text-slate-200">
+                                    <div class="flex items-center gap-2.5">
+                                        <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: ${dotColor}"></span>
+                                        <span>${row.label}</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-2 text-sm font-bold text-slate-900 dark:text-white text-right whitespace-nowrap tabular-nums">
+                                    ${formattedVal}
+                                </td>
+                                <td class="py-3 pl-3 w-28 sm:w-36">
+                                    <div class="w-full h-2.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                                        <div class="h-full rounded-full transition-all duration-700" style="width: ${barWidth}%; background-color: ${dotColor}"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        `;
+                    }).join('');
+
+                    // Bloco de Conclusão individual (quando existir no tema)
+                    const topicConclusionHTML = topic.conclusion ? `
+                        <div class="mt-6 rounded-2xl border p-5 ${group.theme.conclusionBg}">
+                            <div class="flex items-start gap-3.5">
+                                <div class="w-9 h-9 rounded-xl bg-white dark:bg-slate-900 shadow-sm flex items-center justify-center shrink-0 mt-0.5 ${group.theme.conclusionIcon}">
+                                    <i data-lucide="lightbulb" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-display font-bold text-sm uppercase tracking-wider text-slate-900 dark:text-white mb-1">
+                                        Conclusão e Proposta
+                                    </h5>
+                                    <p class="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">
+                                        ${topic.conclusion}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    ` : '';
+
+                    return `
+                        <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-5 sm:p-8 shadow-soft dark:shadow-soft-dark">
+                            <!-- Topo do Card do Tema -->
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-5 border-b border-slate-100 dark:border-slate-800">
+                                <h4 class="font-display font-bold text-xl sm:text-2xl text-slate-900 dark:text-white">
+                                    ${topic.title}
+                                </h4>
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border ${group.theme.badgeBg}">
+                                        <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                                        População: ${topic.population}
+                                    </span>
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-slate-700">
+                                        <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i>
+                                        Amostra: ${topic.sample}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Caixa da Pergunta da Pesquisa -->
+                            <div class="mt-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/70 px-4 py-3.5 flex items-start gap-3">
+                                <i data-lucide="help-circle" class="w-5 h-5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <span class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                                        Pergunta feita na pesquisa
+                                    </span>
+                                    <p class="text-sm sm:text-base font-medium text-slate-800 dark:text-slate-100 mt-0.5">
+                                        "${topic.question}"
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Grid Responsivo: Gráfico + Tabela -->
+                            <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                                <!-- Coluna do Gráfico -->
+                                <div class="lg:col-span-7 flex flex-col">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                                            Gráfico Interativo
+                                        </span>
+                                        <!-- Botão Switcher de Tipo de Gráfico -->
+                                        <div class="inline-flex items-center rounded-xl bg-slate-100 dark:bg-slate-800 p-1 border border-slate-200/80 dark:border-slate-700">
+                                            <button type="button"
+                                                onclick="switchChartType('${topic.id}', '${topic.defaultChartType}')"
+                                                id="btn-${topic.id}-${topic.defaultChartType}"
+                                                class="chart-switch-btn px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm">
+                                                ${getChartTypeLabel(topic.defaultChartType)}
+                                            </button>
+                                            <button type="button"
+                                                onclick="switchChartType('${topic.id}', '${topic.altChartType}')"
+                                                id="btn-${topic.id}-${topic.altChartType}"
+                                                class="chart-switch-btn px-2.5 py-1 rounded-lg text-xs font-semibold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+                                                ${getChartTypeLabel(topic.altChartType)}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="relative w-full h-72 sm:h-80 md:h-[340px] rounded-2xl bg-slate-50/70 dark:bg-slate-950/50 border border-slate-100 dark:border-slate-800/80 p-3 sm:p-4">
+                                        <canvas id="canvas-${topic.id}" aria-label="Gráfico de ${topic.title}"></canvas>
+                                    </div>
+                                </div>
+
+                                <!-- Coluna da Tabela -->
+                                <div class="lg:col-span-5">
+                                    <div class="rounded-2xl border border-slate-200/80 dark:border-slate-800 overflow-hidden bg-white dark:bg-slate-900/60">
+                                        <div class="overflow-x-auto">
+                                            <table class="w-full text-left border-collapse">
+                                                <thead>
+                                                    <tr class="bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200/80 dark:border-slate-700">
+                                                        <th class="py-3 pl-4 pr-2 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                                                            ${topic.categoryHeader}
+                                                        </th>
+                                                        <th class="py-3 px-2 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-right">
+                                                            Freq. Relativa
+                                                        </th>
+                                                        <th class="py-3 pl-2 pr-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-right">
+                                                            Proporção
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="divide-y divide-slate-100 dark:divide-slate-800/60 px-4">
+                                                    ${rowsHTML.replaceAll('<td class="py-3 pr-3', '<td class="py-3 pl-4 pr-2').replaceAll('<td class="py-3 pl-3', '<td class="py-3 pl-2 pr-4')}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            ${topicConclusionHTML}
+                        </div>
+                    `;
+                }).join('');
+
+                // Conclusão Integrada do Grupo (ex: Grupo 1)
+                const groupConclusionHTML = group.groupConclusion ? `
+                    <div class="rounded-3xl border-2 p-6 sm:p-7 ${group.theme.conclusionBg} shadow-soft dark:shadow-soft-dark">
+                        <div class="flex items-start gap-4">
+                            <div class="w-11 h-11 rounded-2xl bg-white dark:bg-slate-900 shadow-sm flex items-center justify-center shrink-0 ${group.theme.conclusionIcon}">
+                                <i data-lucide="lightbulb" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider ${group.theme.conclusionIcon} mb-1">
+                                    Conclusão Integrada • ${group.name} (Temas 1 e 2)
+                                </div>
+                                <p class="text-base sm:text-lg font-medium text-slate-800 dark:text-slate-100 leading-relaxed">
+                                    ${group.groupConclusion}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                ` : '';
+
+                groupSection.innerHTML = headerHTML + topicsHTML + groupConclusionHTML;
+                container.appendChild(groupSection);
+            });
+
+            // Atualiza os ícones Lucide recém-inseridos no DOM
+            lucide.createIcons();
+        }
+
+        // =========================================================================
+        // 4. CRIAÇÃO E ATUALIZAÇÃO DINÂMICA DOS GRÁFICOS (CHART.JS)
+        // =========================================================================
+        function findTopicById(topicId) {
+            for (const group of SURVEY_GROUPS) {
+                const found = group.topics.find(t => t.id === topicId);
+                if (found) return found;
+            }
+            return null;
+        }
+
+        function buildChartConfig(topic, chartType) {
+            const dark = isDarkMode();
+            const textColor = dark ? '#e2e8f0' : '#334155';
+            const mutedTextColor = dark ? '#94a3b8' : '#64748b';
+            const gridColor = dark ? 'rgba(148, 163, 184, 0.14)' : 'rgba(15, 23, 42, 0.08)';
+            const sliceBorderColor = dark ? '#0f172a' : '#ffffff';
+
+            const labels = topic.data.map(d => d.label);
+            const values = topic.data.map(d => d.value);
+            const isCircular = chartType === 'pie' || chartType === 'doughnut';
+            const isLine = chartType === 'line';
+
+            // Definição de cores do dataset conforme o tipo de gráfico
+            let datasetConfig = {
+                label: 'Frequência Relativa',
+                data: values,
+            };
+
+            if (isCircular) {
+                datasetConfig.backgroundColor = topic.palette;
+                datasetConfig.borderColor = sliceBorderColor;
+                datasetConfig.borderWidth = 2.5;
+                datasetConfig.hoverOffset = 8;
+            } else if (isLine) {
+                datasetConfig.borderColor = topic.lineColor || '#10b981';
+                datasetConfig.backgroundColor = topic.lineFill || 'rgba(16, 185, 129, 0.16)';
+                datasetConfig.fill = true;
+                datasetConfig.tension = 0.35;
+                datasetConfig.borderWidth = 3;
+                datasetConfig.pointBackgroundColor = dark ? '#0f172a' : '#ffffff';
+                datasetConfig.pointBorderColor = topic.lineColor || '#10b981';
+                datasetConfig.pointBorderWidth = 2.5;
+                datasetConfig.pointRadius = 5;
+                datasetConfig.pointHoverRadius = 7;
+            } else {
+                // Barras verticais
+                datasetConfig.backgroundColor = topic.singleColor && chartType === topic.defaultChartType
+                    ? topic.singleColor
+                    : (topic.palette || topic.singleColor || '#6366f1');
+                datasetConfig.borderRadius = 8;
+                datasetConfig.borderSkipped = false;
+                datasetConfig.maxBarThickness = 48;
+            }
+
+            // Calcula teto do eixo Y com folga para os rótulos acima das barras/pontos
+            const maxVal = Math.max(...values);
+            const suggestedMax = Math.ceil((maxVal * 1.22) / 5) * 5;
+
+            return {
+                type: chartType,
+                data: {
+                    labels: labels,
+                    datasets: [datasetConfig]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 550,
+                        easing: 'easeOutQuart'
+                    },
+                    layout: {
+                        padding: {
+                            top: isCircular ? 8 : 22,
+                            right: 10,
+                            bottom: 4,
+                            left: 4
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: isCircular,
+                            position: window.innerWidth < 640 ? 'bottom' : 'right',
+                            labels: {
+                                color: textColor,
+                                font: {
+                                    family: 'Inter, sans-serif',
+                                    size: 12,
+                                    weight: '500'
+                                },
+                                padding: 12,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: dark ? 'rgba(15, 23, 42, 0.95)' : 'rgba(15, 23, 42, 0.9)',
+                            titleColor: '#ffffff',
+                            bodyColor: '#f8fafc',
+                            padding: 12,
+                            cornerRadius: 12,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    const val = context.parsed.y !== undefined ? context.parsed.y : context.parsed;
+                                    return ` ${context.label}: ${formatPercent(val, topic.decimals)}`;
+                                }
+                            }
+                        },
+                        datalabels: {
+                            display: function(context) {
+                                const val = context.dataset.data[context.dataIndex];
+                                // Em gráficos circulares, oculta rótulos muito pequenos para não sobrepor
+                                if (isCircular) return val >= 5;
+                                return true;
+                            },
+                            color: function() {
+                                if (isCircular) return '#ffffff';
+                                return textColor;
+                            },
+                            anchor: isCircular ? 'center' : 'end',
+                            align: isCircular ? 'center' : 'top',
+                            offset: isCircular ? 0 : 3,
+                            font: {
+                                family: 'Plus Jakarta Sans, sans-serif',
+                                weight: '700',
+                                size: isCircular ? 11 : 11
+                            },
+                            formatter: function(value) {
+                                return formatPercent(value, topic.decimals);
+                            }
+                        }
+                    },
+                    scales: isCircular ? {} : {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: mutedTextColor,
+                                font: {
+                                    family: 'Inter, sans-serif',
+                                    size: 11,
+                                    weight: '500'
+                                },
+                                maxRotation: 35,
+                                minRotation: 0
+                            },
+                            border: {
+                                color: gridColor
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            suggestedMax: suggestedMax,
+                            grid: {
+                                color: gridColor,
+                                drawTicks: false
+                            },
+                            ticks: {
+                                color: mutedTextColor,
+                                padding: 8,
+                                font: {
+                                    family: 'Inter, sans-serif',
+                                    size: 11
+                                },
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            border: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            };
+        }
+
+        function renderChart(topicId, chartType) {
+            const topic = findTopicById(topicId);
+            if (!topic) return;
+
+            const canvas = document.getElementById(`canvas-${topicId}`);
+            if (!canvas) return;
+
+            // Destrói instância anterior para evitar sobreposição de eventos
+            if (chartInstances[topicId]) {
+                chartInstances[topicId].destroy();
+            }
+
+            activeChartTypes[topicId] = chartType;
+            const config = buildChartConfig(topic, chartType);
+            chartInstances[topicId] = new Chart(canvas.getContext('2d'), config);
+        }
+
+        function renderAllCharts() {
+            SURVEY_GROUPS.forEach(group => {
+                group.topics.forEach(topic => {
+                    const currentType = activeChartTypes[topic.id] || topic.defaultChartType;
+                    renderChart(topic.id, currentType);
+                });
+            });
+        }
+
+        // Alterna o tipo de gráfico de um tema específico (Botão Switcher)
+        window.switchChartType = function(topicId, newType) {
+            const topic = findTopicById(topicId);
+            if (!topic) return;
+
+            renderChart(topicId, newType);
+
+            // Atualiza estado visual dos dois botões do switcher
+            const types = [topic.defaultChartType, topic.altChartType];
+            types.forEach(t => {
+                const btn = document.getElementById(`btn-${topicId}-${t}`);
+                if (!btn) return;
+                if (t === newType) {
+                    btn.className = 'chart-switch-btn px-2.5 py-1 rounded-lg text-xs font-semibold transition-all bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm';
+                } else {
+                    btn.className = 'chart-switch-btn px-2.5 py-1 rounded-lg text-xs font-semibold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white';
+                }
+            });
+        };
+
+        // =========================================================================
+        // 5. FILTRO INTERATIVO POR ABAS DE GRUPOS
+        // =========================================================================
+        function setupGroupFilters() {
+            const filterButtons = document.querySelectorAll('.filter-tab');
+            const groupSections = document.querySelectorAll('.group-section');
+
+            const inactiveClasses = [
+                'bg-white', 'dark:bg-slate-900', 'text-slate-700', 'dark:text-slate-300',
+                'border', 'border-slate-200', 'dark:border-slate-800'
+            ];
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.dataset.filter;
+
+                    // Reseta estilos das abas
+                    filterButtons.forEach(b => {
+                        b.className = 'filter-tab px-4 sm:px-5 py-2.5 rounded-2xl text-sm font-semibold transition-all cursor-pointer bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-indigo-500';
+                    });
+
+                    // Define cor da aba ativa conforme o grupo
+                    let activeStyle = 'bg-indigo-600 text-white shadow-md shadow-indigo-600/25';
+                    if (target !== 'all') {
+                        const grp = SURVEY_GROUPS.find(g => g.id === target);
+                        if (grp) activeStyle = grp.theme.activeTab;
+                    }
+                    btn.className = `filter-tab active px-4 sm:px-5 py-2.5 rounded-2xl text-sm font-semibold transition-all cursor-pointer ${activeStyle}`;
+
+                    // Mostra / Oculta grupos
+                    groupSections.forEach(section => {
+                        if (target === 'all' || section.dataset.groupId === target) {
+                            section.classList.remove('hidden');
+                        } else {
+                            section.classList.add('hidden');
+                        }
+                    });
+
+                    // Garante redimensionamento perfeito dos gráficos recém-exibidos
+                    requestAnimationFrame(() => {
+                        Object.values(chartInstances).forEach(chart => {
+                            if (chart && chart.canvas && chart.canvas.offsetParent !== null) {
+                                chart.resize();
+                                chart.update();
+                            }
+                        });
+                    });
+                });
+            });
+        }
+
+        // =========================================================================
+        // 6. MODO CLARO / MODO ESCURO + MENU MOBILE + VOLTAR AO TOPO
+        // =========================================================================
+        function setupThemeToggle() {
+            const toggleBtn = document.getElementById('theme-toggle');
+            toggleBtn.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                // Re-renderiza todos os gráficos com as cores de contraste do novo tema
+                renderAllCharts();
+            });
+        }
+
+        function setupMobileMenu() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const links = document.querySelectorAll('.mobile-nav-link');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+        }
+
+        function setupBackToTop() {
+            const btn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 450) {
+                    btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                    btn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                } else {
+                    btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                    btn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                }
+            });
+
+            btn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // Atualiza posição da legenda dos gráficos circulares ao redimensionar a janela
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                renderAllCharts();
+            }, 250);
+        });
+
+        // =========================================================================
+        // 7. INICIALIZAÇÃO
+        // =========================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderGroupsHTML();
+            renderAllCharts();
+            setupGroupFilters();
+            setupThemeToggle();
+            setupMobileMenu();
+            setupBackToTop();
+        });
+    </script>
+</body>
+</html>
